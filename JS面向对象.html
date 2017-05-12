@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    //1、简单创建一个对象
+    var o = new Object(); //注意O是大写
+    o.name = 'wangwei';
+    o.age = 23;
+    o.sayName = function () {
+        console.log(this.name);
+    }
+    o.sayName();  //wangwei
+    console.log(o.age)
+
+    //2、以字面量的形式创建一个对象
+    var o = {
+        name: 'wangwei',
+        age: 23,
+        sayName: function () {
+            console.log(this.name);
+        }
+
+    }
+    o.sayName();
+    // * 使用以上的方法创建对象很简单，但是缺点也是非常明显的，
+    // 如果再次创建相同属性和方法的对象的时候，
+    //还要把代码复制一遍，会导致很多代码重复。
+    //3、所以就有了工厂模式来创建对象,其实也就是用函数的方式封装好了
+    function createObj(name, age) {
+        var o = new Object();
+        o.name = name;
+        o.age = age;
+        o.sayName = function () {
+            console.log(this.name);
+        }
+        return o;
+    }
+    var p1 = createObj('xuhang', 21);
+    var p2 = createObj('Tomoya', 22);
+    // p1.sayName(); // 'xuhang'
+    // p2.sayName(); // 'Tomoya'
+    console.log(typeof p1); // object
+    console.log(p1 instanceof createObj) //false  无法判断类型
+    //instanceof:检测某个对象是不是另一个对象的实例。
+    //instanceof:也可以在继承关系中用来判断一个实例是否属于它的父类型。
+    //所以工厂模式的缺点就是无法判断对象的类型
+    //4、构造函数模式
+    function createObj(name,age){
+        this.name=name;
+        this.age=age;
+        this.sayName=function(){
+            console.log(this.name);
+        }
+    }
+    var p3=new createObj('wangwei',23);
+    var p4=new createObj('lihua',13);
+    p3.sayName(); 
+
+
+
+</script>
